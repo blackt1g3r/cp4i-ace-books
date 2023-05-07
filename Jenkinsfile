@@ -1,6 +1,6 @@
 // Validate
-// JENKINS_URL=jenkins-jenkins.itzroks-3100015379-raqclh-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud
-// curl --user "admin:Passw0rd!" -X POST -F "jenkinsfile=Jenkinsfile" https://$JENKINS_URL/pipeline-model-converter/validate
+// JENKINS_URL=jenkins-jenkins.apps.daffy-zpyuqhrn.cloud.techzone.ibm.com
+// curl --user "ocpadmin:EXUxDV4QRuYkkF6izPnx" -X POST -F "jenkinsfile=Jenkinsfile" https://$JENKINS_URL/pipeline-model-converter/validate
 
 // Image variables
 def buildBarImage = "image-registry.openshift-image-registry.svc:5000/jenkins/ace-buildbar:12.0.4.0-ubuntu"
