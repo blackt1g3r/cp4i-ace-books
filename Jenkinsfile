@@ -1,14 +1,14 @@
 // Validate
-// JENKINS_URL=jenkins-jenkins.itzroks-3100015379-raqclh-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud
-// curl --user "admin:Passw0rd!" -X POST -F "jenkinsfile=Jenkinsfile" https://$JENKINS_URL/pipeline-model-converter/validate
+// JENKINS_URL=jenkins-jenkins.apps.daffy-zpyuqhrn.cloud.techzone.ibm.com
+// curl --user "admin:admin123" -X POST -F "jenkinsfile=Jenkinsfile" https://$JENKINS_URL/pipeline-model-converter/validate
 
 // Image variables
 def buildBarImage = "image-registry.openshift-image-registry.svc:5000/jenkins/ace-buildbar:12.0.4.0-ubuntu"
 def ocImage = "image-registry.openshift-image-registry.svc:5000/jenkins/oc-deploy:4.10"
 
 // Params for Git Checkout-Stage
-def gitCp4iDevOpsUtilsRepo = "https://github.com/khongks/cp4i-devops-utils.git"
-def gitRepo = "https://github.com/khongks/cp4i-ace-books.git"
+def gitCp4iDevOpsUtilsRepo = "https://github.com/blackt1g3r/cp4i-devops-utils.git"
+def gitRepo = "https://github.com/blackt1g3r/cp4i-ace-books.git"
 def gitDomain = "github.com"
 
 // Params for Build Bar Stage
@@ -19,7 +19,7 @@ def utilsDir = "cp4i-devops-utils"
 
 // Params for Deploy Bar Stage
 def serverName = "books"
-def namespace = "ace"
+def namespace = "cp4i"
 def configurationList = ""
 
 
@@ -33,12 +33,12 @@ def aceVersion = "12.0.5.0-r4"
 def aceLicense = "L-KSBM-CJ2KWU"
 def replicas = "1"
 
-// Artifactory configurations
-def artifactoryHost = "artifactory-tools.itzroks-3100015379-raqclh-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud"
-def artifactoryPort = "443"
-def artifactoryRepo = "generic-local"
-def artifactoryBasePath = "cp4i"
-def artifactoryCredentials = "artifactory_credentials" // defined in Jenkins credentials
+// Nexus configurations
+def nexusHost = "nexus-route-cp4i.apps.daffy-zpyuqhrn.cloud.techzone.ibm.com"
+def nexusPort = "443"
+def nexusRepo = "generic-local"
+def nexusBasePath = "cp4i"
+def nexusCredentials = "nexus_credentials" // defined in Jenkins credentials
 
 podTemplate(
     serviceAccount: "jenkins",
@@ -58,11 +58,11 @@ podTemplate(
             envVar(key: 'PORT', value: "${port}"),
             envVar(key: 'API_KEY_NAME', value: "${ibmAceSecretName}"),
             envVar(key: 'PROJECT_DIR', value: "${projectDir}"),
-            envVar(key: 'ARTIFACTORY_HOST', value: "${artifactoryHost}"),
-            envVar(key: 'ARTIFACTORY_PORT', value: "${artifactoryPort}"),
-            envVar(key: 'ARTIFACTORY_REPO', value: "${artifactoryRepo}"),
-            envVar(key: 'ARTIFACTORY_BASE_PATH', value: "${artifactoryBasePath}"),
-            envVar(key: 'ARTIFACTORY_CREDENTIALS', value: "${artifactoryCredentials}"),
+            envVar(key: 'ARTIFACTORY_HOST', value: "${nexusHost}"),
+            envVar(key: 'ARTIFACTORY_PORT', value: "${nexusPort}"),
+            envVar(key: 'ARTIFACTORY_REPO', value: "${nexusRepo}"),
+            envVar(key: 'ARTIFACTORY_BASE_PATH', value: "${nexusBasePath}"),
+            envVar(key: 'ARTIFACTORY_CREDENTIALS', value: "${nexusCredentials}"),
             envVar(key: 'ACE_VERSION', value: "${aceVersion}"),
             envVar(key: 'ACE_LICENSE', value: "${aceLicense}"),
             envVar(key: 'REPLICAS', value: "${replicas}"),
@@ -105,7 +105,7 @@ podTemplate(
         }
         stage('Upload Bar File') {
             container("oc-deploy") {
-                withCredentials([usernamePassword(credentialsId: 'artifactory_credentials', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
+                withCredentials([usernamePassword(credentialsId: 'nexus_credentials', usernameVariable: 'ARTIFACTORY_USER', passwordVariable: 'ARTIFACTORY_PASSWORD')]) {
                     sh label: '', script: '''#!/bin/bash
                         set -e
                         cd $PROJECT_DIR
