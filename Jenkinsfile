@@ -4,11 +4,11 @@
 
 // Image variables
 def buildBarImage = "image-registry.openshift-image-registry.svc:5000/jenkins/ace-buildbar:12.0.4.0-ubuntu"
-def ocImage = "image-registry.openshift-image-registry.svc:5000/jenkins/oc-deploy:4.10"
+def ocImage = "image-registry.openshift-image-registry.svc:5000/jenkins/oc-deploy"
 
 // Params for Git Checkout-Stage
-def gitCp4iDevOpsUtilsRepo = "https://github.com/khongks/cp4i-devops-utils.git"
-def gitRepo = "https://github.com/khongks/cp4i-ace-books.git"
+def gitCp4iDevOpsUtilsRepo = "https://github.com/blackt1g3r/cp4i-devops-utils.git"
+def gitRepo = "https://github.com/blackt1g3r/cp4i-ace-books.git"
 def gitDomain = "github.com"
 
 // Params for Build Bar Stage
@@ -19,7 +19,7 @@ def utilsDir = "cp4i-devops-utils"
 
 // Params for Deploy Bar Stage
 def serverName = "books"
-def namespace = "ace"
+def namespace = "cp4i"
 def configurationList = ""
 
 
@@ -34,11 +34,11 @@ def aceLicense = "L-KSBM-CJ2KWU"
 def replicas = "1"
 
 // Artifactory configurations
-def artifactoryHost = "artifactory-tools.itzroks-3100015379-raqclh-6ccd7f378ae819553d37d5f2ee142bd6-0000.au-syd.containers.appdomain.cloud"
+def artifactoryHost = "nexus-route-cp4i.apps.daffy-zpyuqhrn.cloud.techzone.ibm.com"
 def artifactoryPort = "443"
 def artifactoryRepo = "generic-local"
 def artifactoryBasePath = "cp4i"
-def artifactoryCredentials = "artifactory_credentials" // defined in Jenkins credentials
+def artifactoryCredentials = "nexus_credentials" // defined in Jenkins credentials
 
 podTemplate(
     serviceAccount: "jenkins",
