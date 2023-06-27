@@ -3,8 +3,8 @@
 // curl --user "ocpadmin:EXUxDV4QRuYkkF6izPnx" -X POST -F "jenkinsfile=Jenkinsfile" https://$JENKINS_URL/pipeline-model-converter/validate
 
 // Image variables
-def buildBarImage = "image-registry.openshift-image-registry.svc:5000/jenkins/ace-buildbar:12.0.4.0-ubuntu"
-def ocImage = "image-registry.openshift-image-registry.svc:5000/jenkins/oc-deploy"
+def buildBarImage = "image-registry.openshift-image-registry.svc:5000/cp4i/ace-buildbar:12.0.4.0-ubuntu"
+def ocImage = "image-registry.openshift-image-registry.svc:5000/cp4i/oc-deploy"
 
 // Params for Git Checkout-Stage
 def gitCp4iDevOpsUtilsRepo = "https://github.com/blackt1g3r/cp4i-devops-utils.git"
