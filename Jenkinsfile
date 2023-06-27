@@ -34,7 +34,7 @@ def aceLicense = "L-KSBM-CJ2KWU"
 def replicas = "1"
 
 // Artifactory configurations
-def artifactoryHost = "nexus-route-cp4i.apps.daffy-zpyuqhrn.cloud.techzone.ibm.com"
+def artifactoryHost = "nexus-openshift-operators.apps.daffy-t34cv4a1.cloud.techzone.ibm.com"
 def artifactoryPort = "443"
 def artifactoryRepo = "generic-local"
 def artifactoryBasePath = "cp4i"
