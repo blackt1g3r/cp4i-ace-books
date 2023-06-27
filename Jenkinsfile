@@ -29,8 +29,8 @@ def port = "3443"
 def ibmAceSecretName = "ace-dashboard-dash"
 
 // ACE integration server
-def aceVersion = "12.0.5.0-r4"
-def aceLicense = "L-KSBM-CJ2KWU"
+def aceVersion = "12.0.8.0-r2"
+def aceLicense = "L-MJTK-WUU8HE"
 def replicas = "1"
 
 // Artifactory configurations
